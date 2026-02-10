@@ -6,6 +6,7 @@
  */
 
 struct timeval;
+struct timespec;
 
 uint64_t _time_pick_interval_secs(uint32_t min_secs, uint32_t max_secs);
 uint64_t _time_fuzz_msecs(uint64_t ms);
