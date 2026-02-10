@@ -1,3 +1,6 @@
+ver 0.82:
+	Fix issue with using -std=c23 compiler setting.
+
 ver 0.81:
 	Fix issue with systemd watchdog protocol handling.
 
