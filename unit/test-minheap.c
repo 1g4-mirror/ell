@@ -9,10 +9,12 @@
 #include <config.h>
 #endif
 
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <assert.h>
 #include <limits.h>
 #include <stdlib.h>
+#include <alloca.h>
 
 #include <ell/ell.h>
 #include "ell/useful.h"
