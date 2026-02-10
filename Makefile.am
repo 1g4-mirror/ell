@@ -663,7 +663,8 @@ unit/cert-expired.pem: unit/cert-expired.csr unit/cert-ca.pem unit/gencerts.cnf 
 			-extfile $(srcdir)/unit/gencerts.cnf -md sha256 \
 			-startdate 000101120000Z -enddate 010101120000Z \
 			-preserveDN -notext -in $< -out $@ 2> /dev/null
-	$(AM_V_at)rm -r unit/cert-ca-tmp unit/cert-ca-index.txt
+	$(AM_V_at)rm -r unit/cert-ca-tmp unit/cert-ca-index.txt \
+			unit/cert-ca.srl.old
 
 unit/cert-entity-pkcs12-nomac.p12: unit/cert-entity-int-key.pem unit/cert-entity-int.pem
 	$(AM_V_GEN)openssl pkcs12 -inkey $< -in $(builddir)/unit/cert-entity-int.pem -out $@ -export -passout pass:abc -nomac # default ciphers
