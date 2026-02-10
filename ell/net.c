@@ -17,6 +17,7 @@
 #include <sys/ioctl.h>
 #include <netinet/ip.h>
 #include <ifaddrs.h>
+#include <strings.h>
 
 #include "net.h"
 #include "net-private.h"
