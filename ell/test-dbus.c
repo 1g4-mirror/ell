@@ -9,11 +9,13 @@
 #include <config.h>
 #endif
 
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <alloca.h>
 #include <signal.h>
 #include <sys/prctl.h>
 #include <sys/socket.h>
