@@ -9,6 +9,7 @@
 #include <config.h>
 #endif
 
+#define _GNU_SOURCE
 #include <unistd.h>
 #include <sys/socket.h>
 #include <netpacket/packet.h>
