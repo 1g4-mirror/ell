@@ -479,6 +479,270 @@ static const struct aead_test_vector gcm_test6 = {
 	.tag = "f2a9a836e155106aa8dcd618e4099aaa",
 };
 
+/* RFC 3610 - Packet Vector #1 */
+static const struct aead_test_vector rfc3610_ccm_1 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "C0C1C2C3C4C5C6C7C8C9CACBCCCDCECF",
+	.nonce		= "00000003020100A0A1A2A3A4A5",
+	.aad		= "0001020304050607",
+	.plaintext	= "08090A0B0C0D0E0F101112131415161718191A1B1C1D1E",
+	.ciphertext	= "588C979A61C663D2F066D0C2C0F989806D5F6B61DAC384",
+	.tag		= "17E8D12CFDF926E0",
+};
+
+/* RFC 3610 - Packet Vector #2 */
+static const struct aead_test_vector rfc3610_ccm_2 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "C0C1C2C3C4C5C6C7C8C9CACBCCCDCECF",
+	.nonce		= "00000004030201A0A1A2A3A4A5",
+	.aad		= "0001020304050607",
+	.plaintext	= "08090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F",
+	.ciphertext	= "72C91A36E135F8CF291CA894085C87E3CC15C439C9E43A3B",
+	.tag		= "A091D56E10400916",
+};
+
+/* RFC 3610 - Packet Vector #3 */
+static const struct aead_test_vector rfc3610_ccm_3 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "C0C1C2C3C4C5C6C7C8C9CACBCCCDCECF",
+	.nonce		= "00000005040302A0A1A2A3A4A5",
+	.aad		= "0001020304050607",
+	.plaintext	= "08090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F20",
+	.ciphertext	= "51B1E5F44A197D1DA46B0F8E2D282AE871E838BB64DA859657",
+	.tag		= "4ADAA76FBD9FB0C5",
+};
+
+/* RFC 3610 - Packet Vector #4 */
+static const struct aead_test_vector rfc3610_ccm_4 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "C0C1C2C3C4C5C6C7C8C9CACBCCCDCECF",
+	.nonce		= "00000006050403A0A1A2A3A4A5",
+	.aad		= "000102030405060708090A0B",
+	.plaintext	= "0C0D0E0F101112131415161718191A1B1C1D1E",
+	.ciphertext	= "A28C6865939A9A79FAAA5C4C2A9D4A91CDAC8C",
+	.tag		= "96C861B9C9E61EF1",
+};
+
+/* RFC 3610 - Packet Vector #5 */
+static const struct aead_test_vector rfc3610_ccm_5 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "C0C1C2C3C4C5C6C7C8C9CACBCCCDCECF",
+	.nonce		= "00000007060504A0A1A2A3A4A5",
+	.aad		= "000102030405060708090A0B",
+	.plaintext	= "0C0D0E0F101112131415161718191A1B1C1D1E1F",
+	.ciphertext	= "DCF1FB7B5D9E23FB9D4E131253658AD86EBDCA3E",
+	.tag		= "51E83F077D9C2D93",
+};
+
+/* RFC 3610 - Packet Vector #6 */
+static const struct aead_test_vector rfc3610_ccm_6 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "C0C1C2C3C4C5C6C7C8C9CACBCCCDCECF",
+	.nonce		= "00000008070605A0A1A2A3A4A5",
+	.aad		= "000102030405060708090A0B",
+	.plaintext	= "0C0D0E0F101112131415161718191A1B1C1D1E1F20",
+	.ciphertext	= "6FC1B011F006568B5171A42D953D469B2570A4BD87",
+	.tag		= "405A0443AC91CB94",
+};
+
+/* RFC 3610 - Packet Vector #7 */
+static const struct aead_test_vector rfc3610_ccm_7 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "C0C1C2C3C4C5C6C7C8C9CACBCCCDCECF",
+	.nonce		= "00000009080706A0A1A2A3A4A5",
+	.aad		= "0001020304050607",
+	.plaintext	= "08090A0B0C0D0E0F101112131415161718191A1B1C1D1E",
+	.ciphertext	= "0135D1B2C95F41D5D1D4FEC185D166B8094E999DFED96C",
+	.tag		= "048C56602C97ACBB7490",
+};
+
+/* RFC 3610 - Packet Vector #8 */
+static const struct aead_test_vector rfc3610_ccm_8 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "C0C1C2C3C4C5C6C7C8C9CACBCCCDCECF",
+	.nonce		= "0000000A090807A0A1A2A3A4A5",
+	.aad		= "0001020304050607",
+	.plaintext	= "08090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F",
+	.ciphertext	= "7B75399AC0831DD2F0BBD75879A2FD8F6CAE6B6CD9B7DB24",
+	.tag		= "C17B4433F434963F34B4",
+};
+
+/* RFC 3610 - Packet Vector #9 */
+static const struct aead_test_vector rfc3610_ccm_9 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "C0C1C2C3C4C5C6C7C8C9CACBCCCDCECF",
+	.nonce		= "0000000B0A0908A0A1A2A3A4A5",
+	.aad		= "0001020304050607",
+	.plaintext	= "08090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F20",
+	.ciphertext	= "82531A60CC24945A4B8279181AB5C84DF21CE7F9B73F42E197",
+	.tag		= "EA9C07E56B5EB17E5F4E",
+};
+
+/* RFC 3610 - Packet Vector #10 */
+static const struct aead_test_vector rfc3610_ccm_10 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "C0C1C2C3C4C5C6C7C8C9CACBCCCDCECF",
+	.nonce		= "0000000C0B0A09A0A1A2A3A4A5",
+	.aad		= "000102030405060708090A0B",
+	.plaintext	= "0C0D0E0F101112131415161718191A1B1C1D1E",
+	.ciphertext	= "07342594157785152B074098330ABB141B947B",
+	.tag		= "566AA9406B4D999988DD",
+};
+
+/* RFC 3610 - Packet Vector #11 */
+static const struct aead_test_vector rfc3610_ccm_11 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "C0C1C2C3C4C5C6C7C8C9CACBCCCDCECF",
+	.nonce		= "0000000D0C0B0AA0A1A2A3A4A5",
+	.aad		= "000102030405060708090A0B",
+	.plaintext	= "0C0D0E0F101112131415161718191A1B1C1D1E1F",
+	.ciphertext	= "676BB20380B0E301E8AB79590A396DA78B834934",
+	.tag		= "F53AA2E9107A8B6C022C",
+};
+
+/* RFC 3610 - Packet Vector #12 */
+static const struct aead_test_vector rfc3610_ccm_12 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "C0C1C2C3C4C5C6C7C8C9CACBCCCDCECF",
+	.nonce		= "0000000E0D0C0BA0A1A2A3A4A5",
+	.aad		= "000102030405060708090A0B",
+	.plaintext	= "0C0D0E0F101112131415161718191A1B1C1D1E1F20",
+	.ciphertext	= "C0FFA0D6F05BDB67F24D43A4338D2AA4BED7B20E43",
+	.tag		= "CD1AA31662E7AD65D6DB",
+};
+
+/* RFC 3610 - Packet Vector #13 */
+static const struct aead_test_vector rfc3610_ccm_13 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "D7828D13B2B0BDC325A76236DF93CC6B",
+	.nonce		= "00412B4EA9CDBE3C9696766CFA",
+	.aad		= "0BE1A88BACE018B1",
+	.plaintext	= "08E8CF97D820EA258460E96AD9CF5289054D895CEAC47C",
+	.ciphertext	= "4CB97F86A2A4689A877947AB8091EF5386A6FFBDD080F8",
+	.tag		= "E78CF7CB0CDDD7B3",
+};
+
+/* RFC 3610 - Packet Vector #14 */
+static const struct aead_test_vector rfc3610_ccm_14 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "D7828D13B2B0BDC325A76236DF93CC6B",
+	.nonce		= "0033568EF7B2633C9696766CFA",
+	.aad		= "63018F76DC8A1BCB",
+	.plaintext	= "9020EA6F91BDD85AFA0039BA4BAFF9BFB79C7028949CD0EC",
+	.ciphertext	= "4CCB1E7CA981BEFAA0726C55D378061298C85C92814ABC33",
+	.tag		= "C52EE81D7D77C08A",
+};
+
+/* RFC 3610 - Packet Vector #15 */
+static const struct aead_test_vector rfc3610_ccm_15 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "D7828D13B2B0BDC325A76236DF93CC6B",
+	.nonce		= "00103FE41336713C9696766CFA",
+	.aad		= "AA6CFA36CAE86B40",
+	.plaintext	= "B916E0EACC1C00D7DCEC68EC0B3BBB1A02DE8A2D1AA346132E",
+	.ciphertext	= "B1D23A2220DDC0AC900D9AA03C61FCF4A559A4417767089708",
+	.tag		= "A776796EDB723506",
+};
+
+/* RFC 3610 - Packet Vector #16 */
+static const struct aead_test_vector rfc3610_ccm_16 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "D7828D13B2B0BDC325A76236DF93CC6B",
+	.nonce		= "00764C63B8058E3C9696766CFA",
+	.aad		= "D0D0735C531E1BECF049C244",
+	.plaintext	= "12DAAC5630EFA5396F770CE1A66B21F7B2101C",
+	.ciphertext	= "14D253C3967B70609B7CBB7C49916028324526",
+	.tag		= "9A6F49975BCADEAF",
+};
+
+/* RFC 3610 - Packet Vector #17 */
+static const struct aead_test_vector rfc3610_ccm_17 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "D7828D13B2B0BDC325A76236DF93CC6B",
+	.nonce		= "00F8B678094E3B3C9696766CFA",
+	.aad		= "77B60F011C03E1525899BCAE",
+	.plaintext	= "E88B6A46C78D63E52EB8C546EFB5DE6F75E9CC0D",
+	.ciphertext	= "5545FF1A085EE2EFBF52B2E04BEE1E2336C73E3F",
+	.tag		= "762C0C7744FE7E3C",
+};
+
+/* RFC 3610 - Packet Vector #18 */
+static const struct aead_test_vector rfc3610_ccm_18 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "D7828D13B2B0BDC325A76236DF93CC6B",
+	.nonce		= "00D560912D3F703C9696766CFA",
+	.aad		= "CD9044D2B71FDB8120EA60C0",
+	.plaintext	= "6435ACBAFB11A82E2F071D7CA4A5EBD93A803BA87F",
+	.ciphertext	= "009769ECABDF48625594C59251E6035722675E04C8",
+	.tag		= "47099E5AE0704551",
+};
+
+/* RFC 3610 - Packet Vector #19 */
+static const struct aead_test_vector rfc3610_ccm_19 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "D7828D13B2B0BDC325A76236DF93CC6B",
+	.nonce		= "0042FFF8F1951C3C9696766CFA",
+	.aad		= "D85BC7E69F944FB8",
+	.plaintext	= "8A19B950BCF71A018E5E6701C91787659809D67DBEDD18",
+	.ciphertext	= "BC218DAA947427B6DB386A99AC1AEF23ADE0B52939CB6A",
+	.tag		= "637CF9BEC2408897C6BA",
+};
+
+/* RFC 3610 - Packet Vector #20 */
+static const struct aead_test_vector rfc3610_ccm_20 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "D7828D13B2B0BDC325A76236DF93CC6B",
+	.nonce		= "00920F40E56CDC3C9696766CFA",
+	.aad		= "74A0EBC9069F5B37",
+	.plaintext	= "1761433C37C5A35FC1F39F406302EB907C6163BE38C98437",
+	.ciphertext	= "5810E6FD25874022E80361A478E3E9CF484AB04F447EFFF6",
+	.tag		= "F0A477CC2FC9BF548944",
+};
+
+/* RFC 3610 - Packet Vector #21 */
+static const struct aead_test_vector rfc3610_ccm_21 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "D7828D13B2B0BDC325A76236DF93CC6B",
+	.nonce		= "0027CA0C7120BC3C9696766CFA",
+	.aad		= "44A3AA3AAE6475CA",
+	.plaintext	= "A434A8E58500C6E41530538862D686EA9E81301B5AE4226BFA",
+	.ciphertext	= "F2BEED7BC5098E83FEB5B31608F8E29C38819A89C8E776F154",
+	.tag		= "4D4151A4ED3A8B87B9CE",
+};
+
+/* RFC 3610 - Packet Vector #22 */
+static const struct aead_test_vector rfc3610_ccm_22 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "D7828D13B2B0BDC325A76236DF93CC6B",
+	.nonce		= "005B8CCBCD9AF83C9696766CFA",
+	.aad		= "EC46BB63B02520C33C49FD70",
+	.plaintext	= "B96B49E21D621741632875DB7F6C9243D2D7C2",
+	.ciphertext	= "31D750A09DA3ED7FDDD49A2032AABF17EC8EBF",
+	.tag		= "7D22C8088C666BE5C197",
+};
+
+/* RFC 3610 - Packet Vector #23 */
+static const struct aead_test_vector rfc3610_ccm_23 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "D7828D13B2B0BDC325A76236DF93CC6B",
+	.nonce		= "003EBE94044B9A3C9696766CFA",
+	.aad		= "47A65AC78B3D594227E85E71",
+	.plaintext	= "E2FCFBB880442C731BF95167C8FFD7895E337076",
+	.ciphertext	= "E882F1DBD38CE3EDA7C23F04DD65071EB41342AC",
+	.tag		= "DF7E00DCCEC7AE52987D",
+};
+
+/* RFC 3610 - Packet Vector #24 */
+static const struct aead_test_vector rfc3610_ccm_24 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "D7828D13B2B0BDC325A76236DF93CC6B",
+	.nonce		= "008D493B30AE8B3C9696766CFA",
+	.aad		= "6E37A6EF546D955D34AB6059",
+	.plaintext	= "ABF21C0B02FEB88F856DF4A37381BCE3CC128517D4",
+	.ciphertext	= "F32905B88A641B04B9C9FFB58CC390900F3DA12AB1",
+	.tag		= "6DCE9E82EFA16DA62059",
+};
+
 static bool aead_cipher_precheck(const void *data)
 {
 	const struct aead_test_vector *tv = data;
@@ -664,6 +928,31 @@ int main(int argc, char *argv[])
 	add_aead_test("aes_gcm test 4", &gcm_test4);
 	add_aead_test("aes_gcm test 5", &gcm_test5);
 	add_aead_test("aes_gcm test 6", &gcm_test6);
+
+	add_aead_test("RFC3610 - Packet Vector #1", &rfc3610_ccm_1);
+	add_aead_test("RFC3610 - Packet Vector #2", &rfc3610_ccm_2);
+	add_aead_test("RFC3610 - Packet Vector #3", &rfc3610_ccm_3);
+	add_aead_test("RFC3610 - Packet Vector #4", &rfc3610_ccm_4);
+	add_aead_test("RFC3610 - Packet Vector #5", &rfc3610_ccm_5);
+	add_aead_test("RFC3610 - Packet Vector #6", &rfc3610_ccm_6);
+	add_aead_test("RFC3610 - Packet Vector #7", &rfc3610_ccm_7);
+	add_aead_test("RFC3610 - Packet Vector #8", &rfc3610_ccm_8);
+	add_aead_test("RFC3610 - Packet Vector #9", &rfc3610_ccm_9);
+	add_aead_test("RFC3610 - Packet Vector #10", &rfc3610_ccm_10);
+	add_aead_test("RFC3610 - Packet Vector #11", &rfc3610_ccm_11);
+	add_aead_test("RFC3610 - Packet Vector #12", &rfc3610_ccm_12);
+	add_aead_test("RFC3610 - Packet Vector #13", &rfc3610_ccm_13);
+	add_aead_test("RFC3610 - Packet Vector #14", &rfc3610_ccm_14);
+	add_aead_test("RFC3610 - Packet Vector #15", &rfc3610_ccm_15);
+	add_aead_test("RFC3610 - Packet Vector #16", &rfc3610_ccm_16);
+	add_aead_test("RFC3610 - Packet Vector #17", &rfc3610_ccm_17);
+	add_aead_test("RFC3610 - Packet Vector #18", &rfc3610_ccm_18);
+	add_aead_test("RFC3610 - Packet Vector #19", &rfc3610_ccm_19);
+	add_aead_test("RFC3610 - Packet Vector #20", &rfc3610_ccm_20);
+	add_aead_test("RFC3610 - Packet Vector #21", &rfc3610_ccm_21);
+	add_aead_test("RFC3610 - Packet Vector #22", &rfc3610_ccm_22);
+	add_aead_test("RFC3610 - Packet Vector #23", &rfc3610_ccm_23);
+	add_aead_test("RFC3610 - Packet Vector #24", &rfc3610_ccm_24);
 
 	add_encrypt_test("ARC4/encrypt/test 1", &arc4_test1);
 	add_decrypt_test("ARC4/decrypt/test 1", &arc4_test1);
