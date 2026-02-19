@@ -10,6 +10,7 @@
 #endif
 
 #include <assert.h>
+#include <sys/stat.h>
 
 #include <ell/ell.h>
 
@@ -135,6 +136,20 @@ static const struct pem_from_data_test single_line_cert_chain = {
 		"DK3OGM6cC5tbQGWaIT0Q407GJBGpaijDicA2YqlK\n"
 		"-----END CERTIFICATE-----\n",
 };
+
+static bool pkcs8_key_parser_precheck(const void *data)
+{
+	struct stat st;
+
+	/*
+	 * Despite the path, this directory exists whether the module
+	 * is external or built-in.
+	 */
+	if (stat("/sys/module/pkcs8_key_parser", &st) < 0)
+		return false;
+
+	return S_ISDIR(st.st_mode);
+}
 
 static void destroy_cert(void *cert)
 {
@@ -342,6 +357,10 @@ struct test_load_file_params {
 	(&(struct test_load_file_params) {				\
 		CERTDIR fn, (cert), (certchain), (privkey), (encrypted) })
 
+#define add_encrypted_pkey_test(name, fn)				\
+	l_test_add_data_func_precheck(name, fn, test_encrypted_pkey,	\
+		pkcs8_key_parser_precheck, 0)
+
 static void test_load_file(const void *data)
 {
 	const struct test_load_file_params *params = data;
@@ -382,6 +401,11 @@ static void test_load_file(const void *data)
 		l_key_free(privkey);
 }
 
+#define add_file_test(name, fn, cert, certchain, privkey, encrypted)	\
+	l_test_add_data_func_precheck(name, TEST_LOAD_PARAMS(fn, cert,	\
+		certchain, privkey, encrypted),				\
+		test_load_file, pkcs8_key_parser_precheck, 0)
+
 int main(int argc, char *argv[])
 {
 	l_test_init(&argc, &argv);
@@ -394,7 +418,8 @@ int main(int argc, char *argv[])
 	l_test_add("pem/empty label", test_pem, &empty_label);
 	l_test_add("pem/cert chain from data", test_chain_from_data,
 			&single_line_cert_chain);
-	l_test_add("pem/private key from data", test_priv_key_from_data, NULL);
+	l_test_add_func_precheck("pem/private key from data",
+			test_priv_key_from_data, pkcs8_key_parser_precheck, 0);
 
 	if (!l_checksum_is_supported(L_CHECKSUM_MD5, false) ||
 			!l_checksum_is_supported(L_CHECKSUM_SHA1, false) ||
@@ -402,74 +427,56 @@ int main(int argc, char *argv[])
 			!l_key_is_supported(L_KEY_FEATURE_CRYPTO))
 		goto done;
 
-	l_test_add("pem/PKCS#1 vs. PKCS#8 unenecrypted Private Key",
-			test_unencrypted_pkey, NULL);
+	l_test_add_func_precheck("pem/PKCS#1 vs. PKCS#8 unenecrypted Private Key",
+			test_unencrypted_pkey, pkcs8_key_parser_precheck, 0);
 
-	l_test_add("pem/v1 MD5AndDES encrypted Private Key",
-			test_encrypted_pkey,
+	add_encrypted_pkey_test("pem/v1 MD5AndDES encrypted Private Key",
 			CERTDIR "cert-client-key-pkcs8-md5-des.pem");
-	l_test_add("pem/v1 SHA1AndDES encrypted Private Key",
-			test_encrypted_pkey,
+	add_encrypted_pkey_test("pem/v1 SHA1AndDES encrypted Private Key",
 			CERTDIR "cert-client-key-pkcs8-sha1-des.pem");
-	l_test_add("pem/v2 DES encrypted Private Key", test_encrypted_pkey,
+	add_encrypted_pkey_test("pem/v2 DES encrypted Private Key",
 			CERTDIR "cert-client-key-pkcs8-v2-des.pem");
 
 	if (l_cipher_is_supported(L_CIPHER_DES3_EDE_CBC) &&
 			l_checksum_is_supported(L_CHECKSUM_SHA224, false)) {
-		l_test_add("pem/v2 DES EDE3 encrypted Private Key",
-				test_encrypted_pkey, CERTDIR
-				"cert-client-key-pkcs8-v2-des-ede3.pem");
+		add_encrypted_pkey_test("pem/v2 DES EDE3 encrypted Private Key",
+				CERTDIR "cert-client-key-pkcs8-v2-des-ede3.pem");
 	}
 
 	if (l_cipher_is_supported(L_CIPHER_AES)) {
 		if (l_checksum_is_supported(L_CHECKSUM_SHA256, false))
-			l_test_add("pem/v2 AES128-encrypted Private Key",
-				test_encrypted_pkey,
+			add_encrypted_pkey_test("pem/v2 AES128-encrypted Private Key",
 				CERTDIR "cert-client-key-pkcs8-v2-aes128.pem");
 
 		if (l_checksum_is_supported(L_CHECKSUM_SHA512, false))
-			l_test_add("pem/v2 AES256-encrypted Private Key",
-				test_encrypted_pkey,
+			add_encrypted_pkey_test("pem/v2 AES256-encrypted Private Key",
 				CERTDIR "cert-client-key-pkcs8-v2-aes256.pem");
 	}
 
-	l_test_add("pem/PKCS#1 DES-encrypted RSA Private Key",
-			test_encrypted_pkey,
+	add_encrypted_pkey_test("pem/PKCS#1 DES-encrypted RSA Private Key",
 			CERTDIR "cert-client-key-pkcs1-des.pem");
 
 	if (l_cipher_is_supported(L_CIPHER_DES3_EDE_CBC))
-		l_test_add("pem/PKCS#1 DES-EDE3-encrypted RSA Private Key",
-				test_encrypted_pkey,
+		add_encrypted_pkey_test("pem/PKCS#1 DES-EDE3-encrypted RSA Private Key",
 				CERTDIR "cert-client-key-pkcs1-des3.pem");
 
 	if (l_cipher_is_supported(L_CIPHER_AES_CBC)) {
-		l_test_add("pem/PKCS#1 AES128-encrypted RSA Private Key",
-				test_encrypted_pkey,
+		add_encrypted_pkey_test("pem/PKCS#1 AES128-encrypted RSA Private Key",
 				CERTDIR "cert-client-key-pkcs1-aes128.pem");
-		l_test_add("pem/PKCS#1 AES192-encrypted RSA Private Key",
-				test_encrypted_pkey,
+		add_encrypted_pkey_test("pem/PKCS#1 AES192-encrypted RSA Private Key",
 				CERTDIR "cert-client-key-pkcs1-aes192.pem");
-		l_test_add("pem/PKCS#1 AES256-encrypted RSA Private Key",
-				test_encrypted_pkey,
+		add_encrypted_pkey_test("pem/PKCS#1 AES256-encrypted RSA Private Key",
 				CERTDIR "cert-client-key-pkcs1-aes256.pem");
 	}
 
-	l_test_add("detect-format/PEM PKCS#1 unencrypted private key",
-			test_load_file,
-			TEST_LOAD_PARAMS("cert-client-key-pkcs1.pem",
-						false, false, true, false));
-	l_test_add("detect-format/PEM PKCS#1 encrypted private key",
-			test_load_file,
-			TEST_LOAD_PARAMS("cert-client-key-pkcs1-des.pem",
-						false, false, true, true));
-	l_test_add("detect-format/PEM PKCS#8 unencrypted private key",
-			test_load_file,
-			TEST_LOAD_PARAMS("cert-client-key-pkcs8.pem",
-						false, false, true, false));
-	l_test_add("detect-format/PEM PKCS#8 encrypted private key",
-			test_load_file,
-			TEST_LOAD_PARAMS("cert-client-key-pkcs8-sha1-des.pem",
-						false, false, true, true));
+	add_file_test("detect-format/PEM PKCS#1 unencrypted private key",
+			"cert-client-key-pkcs1.pem", false, false, true, false);
+	add_file_test("detect-format/PEM PKCS#1 encrypted private key",
+			"cert-client-key-pkcs1-des.pem", false, false, true, true);
+	add_file_test("detect-format/PEM PKCS#8 unencrypted private key",
+			"cert-client-key-pkcs8.pem", false, false, true, false);
+	add_file_test("detect-format/PEM PKCS#8 encrypted private key",
+			"cert-client-key-pkcs8-sha1-des.pem", false, false, true, true);
 	l_test_add("detect-format/PEM X.509 certificate",
 			test_load_file,
 			TEST_LOAD_PARAMS("cert-client.pem",
@@ -478,31 +485,18 @@ int main(int argc, char *argv[])
 			test_load_file,
 			TEST_LOAD_PARAMS("cert-client.crt",
 						true, false, false, false));
-	l_test_add("detect-format/PEM combined",
-			test_load_file,
-			TEST_LOAD_PARAMS("cert-entity-combined.pem",
-						true, true, true, true));
-	l_test_add("detect-format/DER PKCS#12 combined",
-			test_load_file,
-			TEST_LOAD_PARAMS("cert-entity-pkcs12-nomac.p12",
-						true, false, true, true));
-
-	l_test_add("pkcs#12/Combined RC2-based ciphers + SHA1",
-			test_load_file,
-			TEST_LOAD_PARAMS("cert-entity-pkcs12-rc2-sha1.p12",
-						true, true, true, true));
-	l_test_add("pkcs#12/Combined DES-based ciphers + SHA256",
-			test_load_file,
-			TEST_LOAD_PARAMS("cert-entity-pkcs12-des-sha256.p12",
-						true, true, true, true));
-	l_test_add("pkcs#12/Combined RC4-based ciphers + SHA384",
-			test_load_file,
-			TEST_LOAD_PARAMS("cert-entity-pkcs12-rc4-sha384.p12",
-						true, true, true, true));
-	l_test_add("pkcs#12/Combined PKCS#5 ciphers + SHA512",
-			test_load_file,
-			TEST_LOAD_PARAMS("cert-entity-pkcs12-pkcs5-sha512.p12",
-						true, true, true, true));
+	add_file_test("detect-format/PEM combined",
+			"cert-entity-combined.pem", true, true, true, true);
+	add_file_test("detect-format/DER PKCS#12 combined",
+			"cert-entity-pkcs12-nomac.p12", true, false, true, true);
+	add_file_test("pkcs#12/Combined RC2-based ciphers + SHA1",
+			"cert-entity-pkcs12-rc2-sha1.p12", true, true, true, true);
+	add_file_test("pkcs#12/Combined DES-based ciphers + SHA256",
+			"cert-entity-pkcs12-des-sha256.p12", true, true, true, true);
+	add_file_test("pkcs#12/Combined RC4-based ciphers + SHA384",
+			"cert-entity-pkcs12-rc4-sha384.p12", true, true, true, true);
+	add_file_test("pkcs#12/Combined PKCS#5 ciphers + SHA512",
+			"cert-entity-pkcs12-pkcs5-sha512.p12", true, true, true, true);
 
 done:
 	return l_test_run();
