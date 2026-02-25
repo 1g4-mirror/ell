@@ -743,6 +743,208 @@ static const struct aead_test_vector rfc3610_ccm_24 = {
 	.tag		= "6DCE9E82EFA16DA62059",
 };
 
+/* NIST CCM-AES128 - Example #1 */
+static const struct aead_test_vector nist_ccm_aes128_1 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "404142434445464748494A4B4C4D4E4F",
+	.nonce		= "10111213141516",
+	.aad		= "0001020304050607",
+	.plaintext	= "20212223",
+	.ciphertext	= "7162015B",
+	.tag		= "4DAC255D",
+};
+
+/* NIST CCM-AES128 - Example #2 */
+static const struct aead_test_vector nist_ccm_aes128_2 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "404142434445464748494A4B4C4D4E4F",
+	.nonce		= "1011121314151617",
+	.aad		= "000102030405060708090A0B0C0D0E0F",
+	.plaintext	= "202122232425262728292A2B2C2D2E2F",
+	.ciphertext	= "D2A1F0E051EA5F62081A7792073D593D",
+	.tag		= "1FC64FBFACCD",
+};
+
+/* NIST CCM-AES128 - Example #3 */
+static const struct aead_test_vector nist_ccm_aes128_3 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "404142434445464748494A4B4C4D4E4F",
+	.nonce		= "101112131415161718191A1B",
+	.aad		= "000102030405060708090A0B0C0D0E0F"
+			  "10111213",
+	.plaintext	= "202122232425262728292A2B2C2D2E2F"
+			  "3031323334353637",
+	.ciphertext	= "E3B201A9F5B71A7A9B1CEAECCD97E70B"
+			  "6176AAD9A4428AA5",
+	.tag		= "484392FBC1B09951",
+};
+
+/* NIST CCM-AES128 - Example #4 */
+static const struct aead_test_vector nist_ccm_aes128_4 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "404142434445464748494A4B4C4D4E4F",
+	.nonce		= "10111213141516",
+	.plaintext	= "202122232425262728292A2B2C2D2E2F"
+			  "303132333435363738393A3B3C3D3E3F"
+			  "404142434445464748494A4B4C4D4E4F"
+			  "505152535455565758595A5B5C5D5E5F",
+	.ciphertext	= "7162015BC051951E5918AEAF3C11F3D4"
+			  "AC363F8D5B6AF3D369603B04F24CAE29"
+			  "964E2F2BF9D31143F72527CE2DB402EA"
+			  "B7660E4A10B08E82266517CDF60267F9",
+	.tag		= "C66B655C",
+};
+
+/* NIST CCM-AES128 - Example #5 */
+static const struct aead_test_vector nist_ccm_aes128_5 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "404142434445464748494A4B4C4D4E4F",
+	.nonce		= "10111213141516",
+	.aad		= "000102030405060708090A0B0C0D0E0F"
+			  "101112131415161718191A1B1C1D1E1F"
+			  "202122232425262728292A2B2C2D2E2F"
+			  "303132333435363738393A3B3C3D3E3F",
+	.tag		= "E84023F8",
+};
+
+/* NIST CCM-AES192 - Example #1 */
+static const struct aead_test_vector nist_ccm_aes192_1 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "404142434445464748494A4B4C4D4E4F"
+			  "5051525354555657",
+	.nonce		= "10111213141516",
+	.aad		= "0001020304050607",
+	.plaintext	= "20212223",
+	.ciphertext	= "18EE1730",
+	.tag		= "C8C326D5",
+};
+
+/* NIST CCM-AES192 - Example #2 */
+static const struct aead_test_vector nist_ccm_aes192_2 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "404142434445464748494A4B4C4D4E4F"
+			  "5051525354555657",
+	.nonce		= "1011121314151617",
+	.aad		= "000102030405060708090A0B0C0D0E0F",
+	.plaintext	= "202122232425262728292A2B2C2D2E2F",
+	.ciphertext	= "2232B6E0924148AE7239BCBD1A0F7ECB",
+	.tag		= "56E9CC28AA67",
+};
+
+/* NIST CCM-AES192 - Example #3 */
+static const struct aead_test_vector nist_ccm_aes192_3 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "404142434445464748494A4B4C4D4E4F"
+			  "5051525354555657",
+	.nonce		= "101112131415161718191A1B",
+	.aad		= "000102030405060708090A0B0C0D0E0F"
+			  "10111213",
+	.plaintext	= "202122232425262728292A2B2C2D2E2F"
+			  "3031323334353637",
+	.ciphertext	= "8081316FD89624D62CE7637FB94995B6"
+			  "631C50D61586DE01",
+	.tag		= "42366952505F995A",
+};
+
+/* NIST CCM-AES192 - Example #4 */
+static const struct aead_test_vector nist_ccm_aes192_4 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "404142434445464748494A4B4C4D4E4F"
+			  "5051525354555657",
+	.nonce		= "10111213141516",
+	.plaintext	= "202122232425262728292A2B2C2D2E2F"
+			  "303132333435363738393A3B3C3D3E3F"
+			  "404142434445464748494A4B4C4D4E4F"
+			  "505152535455565758595A5B5C5D5E5F",
+	.ciphertext	= "18EE1730F4490EA847A8E9C532C69F9C"
+			  "0A539A585C1E7B6A5AF919F4819088A9"
+			  "6ED632555098D3007E7D963C7BD013EB"
+			  "307671D0FBC39A0DF4A26A9F4B9E4DAD",
+	.tag		= "C9CE2FBC",
+};
+
+/* NIST CCM-AES192 - Example #5 */
+static const struct aead_test_vector nist_ccm_aes192_5 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "404142434445464748494A4B4C4D4E4F"
+			  "5051525354555657",
+	.nonce		= "10111213141516",
+	.aad		= "000102030405060708090A0B0C0D0E0F"
+			  "101112131415161718191A1B1C1D1E1F"
+			  "202122232425262728292A2B2C2D2E2F"
+			  "303132333435363738393A3B3C3D3E3F",
+	.tag		= "F1FB2A57",
+};
+
+/* NIST CCM-AES256 - Example #1 */
+static const struct aead_test_vector nist_ccm_aes256_1 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "404142434445464748494A4B4C4D4E4F"
+			  "505152535455565758595A5B5C5D5E5F",
+	.nonce		= "10111213141516",
+	.aad		= "0001020304050607",
+	.plaintext	= "20212223",
+	.ciphertext	= "8AB1A874",
+	.tag		= "95FC0820",
+};
+
+/* NIST CCM-AES256 - Example #2 */
+static const struct aead_test_vector nist_ccm_aes256_2 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "404142434445464748494A4B4C4D4E4F"
+			  "505152535455565758595A5B5C5D5E5F",
+	.nonce		= "1011121314151617",
+	.aad		= "000102030405060708090A0B0C0D0E0F",
+	.plaintext	= "202122232425262728292A2B2C2D2E2F",
+	.ciphertext	= "AF1785FC0F5EA7D0CFBA837246484497",
+	.tag		= "94B826C8849E",
+};
+
+/* NIST CCM-AES256 - Example #3 */
+static const struct aead_test_vector nist_ccm_aes256_3 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "404142434445464748494A4B4C4D4E4F"
+			  "505152535455565758595A5B5C5D5E5F",
+	.nonce		= "101112131415161718191A1B",
+	.aad		= "000102030405060708090A0B0C0D0E0F"
+			  "10111213",
+	.plaintext	= "202122232425262728292A2B2C2D2E2F"
+			  "3031323334353637",
+	.ciphertext	= "04F883AEB3BD0730EAF50BB6DE4FA221"
+			  "2034E4E41B0E75E5",
+	.tag		= "2B48C8766F7E7649",
+};
+
+/* NIST CCM-AES256 - Example #4 */
+static const struct aead_test_vector nist_ccm_aes256_4 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "404142434445464748494A4B4C4D4E4F"
+			  "505152535455565758595A5B5C5D5E5F",
+	.nonce		= "10111213141516",
+	.plaintext	= "202122232425262728292A2B2C2D2E2F"
+			  "303132333435363738393A3B3C3D3E3F"
+			  "404142434445464748494A4B4C4D4E4F"
+			  "505152535455565758595A5B5C5D5E5F",
+	.ciphertext	= "8AB1A874F6853F2443A59500F78D1727"
+			  "2D6D39DFA6D0E65107B10700C2CE9EE8"
+			  "663D3E2A01C2E12C32E9377442231920"
+			  "BE53278F4F60A972B709BB16932936BA",
+	.tag		= "3FBD0FAE",
+};
+
+/* NIST CCM-AES256 - Example #5 */
+static const struct aead_test_vector nist_ccm_aes256_5 = {
+	.type		= L_AEAD_CIPHER_AES_CCM,
+	.key		= "404142434445464748494A4B4C4D4E4F"
+			  "505152535455565758595A5B5C5D5E5F",
+	.nonce		= "10111213141516",
+	.aad		= "000102030405060708090A0B0C0D0E0F"
+			  "101112131415161718191A1B1C1D1E1F"
+			  "202122232425262728292A2B2C2D2E2F"
+			  "303132333435363738393A3B3C3D3E3F",
+	.tag		= "A6CF8230",
+};
+
 static bool aead_cipher_precheck(const void *data)
 {
 	const struct aead_test_vector *tv = data;
@@ -953,6 +1155,22 @@ int main(int argc, char *argv[])
 	add_aead_test("RFC3610 - Packet Vector #22", &rfc3610_ccm_22);
 	add_aead_test("RFC3610 - Packet Vector #23", &rfc3610_ccm_23);
 	add_aead_test("RFC3610 - Packet Vector #24", &rfc3610_ccm_24);
+
+	add_aead_test("NIST CCM-AES128 - Example #1", &nist_ccm_aes128_1);
+	add_aead_test("NIST CCM-AES128 - Example #2", &nist_ccm_aes128_2);
+	add_aead_test("NIST CCM-AES128 - Example #3", &nist_ccm_aes128_3);
+	add_aead_test("NIST CCM-AES128 - Example #4", &nist_ccm_aes128_4);
+	add_aead_test("NIST CCM-AES128 - Example #5", &nist_ccm_aes128_5);
+	add_aead_test("NIST CCM-AES192 - Example #1", &nist_ccm_aes192_1);
+	add_aead_test("NIST CCM-AES192 - Example #2", &nist_ccm_aes192_2);
+	add_aead_test("NIST CCM-AES192 - Example #3", &nist_ccm_aes192_3);
+	add_aead_test("NIST CCM-AES192 - Example #4", &nist_ccm_aes192_4);
+	add_aead_test("NIST CCM-AES192 - Example #5", &nist_ccm_aes192_5);
+	add_aead_test("NIST CCM-AES256 - Example #1", &nist_ccm_aes256_1);
+	add_aead_test("NIST CCM-AES256 - Example #2", &nist_ccm_aes256_2);
+	add_aead_test("NIST CCM-AES256 - Example #3", &nist_ccm_aes256_3);
+	add_aead_test("NIST CCM-AES256 - Example #4", &nist_ccm_aes256_4);
+	add_aead_test("NIST CCM-AES256 - Example #5", &nist_ccm_aes256_5);
 
 	add_encrypt_test("ARC4/encrypt/test 1", &arc4_test1);
 	add_decrypt_test("ARC4/decrypt/test 1", &arc4_test1);
