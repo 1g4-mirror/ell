@@ -1,3 +1,7 @@
+ver 0.83:
+	Fix issue with PKCS#8 unit tests.
+	Add additional test vectors for AES-CCM.
+
 ver 0.82:
 	Fix issue with using -std=c23 compiler setting.
 
